@@ -1,0 +1,19 @@
+{
+  "name": "mon-memetrader",
+  "version": "1.0.0",
+  "description": "Bot MemeTrader Pro V3 - projet complet front+back",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Vous",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "binance-api-node": "^1.15.1",
+    "dotenv": "^16.0.3"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

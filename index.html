@@ -1,346 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MemeTrader Pro V3 - Trading Agressif</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
-      color: #e2e8f0;
-    }
-    .gradient-bg {
-      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    }
-    .card {
-      background-color: #1e293b;
-      border-radius: 1rem;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-    }
-    .coin-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .coin-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    }
-    .chart-container {
-      height: 120px;
-      position: relative;
-      overflow: hidden;
-    }
-    .chart {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .demo-label {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background-color: rgba(239,68,68,0.9);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-weight: bold;
-      z-index: 100;
-    }
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(59,130,246,0); }
-      100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
-    }
-    .progress-bar {
-      height: 6px;
-      background-color: #3b82f6;
-      border-radius: 3px;
-      transition: width 0.5s ease;
-    }
-    .blink {
-      animation: blink 1s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    .flash {
-      animation: flash 1s;
-    }
-    @keyframes flash {
-      0%, 100% { background-color: transparent; }
-      50% { background-color: rgba(59,130,246,0.3); }
-    }
-    .profit-flash {
-      animation: profit-flash 1s;
-    }
-    @keyframes profit-flash {
-      0%, 100% { background-color: transparent; }
-      50% { background-color: rgba(16,185,129,0.3); }
-    }
-    .loss-flash {
-      animation: loss-flash 1s;
-    }
-    @keyframes loss-flash {
-      0%, 100% { background-color: transparent; }
-      50% { background-color: rgba(239,68,68,0.3); }
-    }
-    .mini-chart {
-      height: 30px;
-      width: 60px;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .tooltip {
-      position: relative;
-      display: inline-block;
-    }
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 200px;
-      background-color: #374151;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 8px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      margin-left: -100px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-    }
-    .profit-counter {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: rgba(16,185,129,0.9);
-      color: white;
-      padding: 15px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1.5rem;
-      z-index: 100;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-    }
-    .profit-counter.pulse-profit {
-      animation: pulse-profit 0.5s;
-    }
-    @keyframes pulse-profit {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    .trade-counter {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: rgba(59,130,246,0.9);
-      color: white;
-      padding: 15px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      z-index: 100;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
-    }
-    .highlight-row {
-      animation: highlight 2s;
-    }
-    @keyframes highlight {
-      0% { background-color: rgba(16,185,129,0.3); }
-      100% { background-color: transparent; }
-    }
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background-color: rgba(0,0,0,0.5);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-    }
-    .modal {
-      background-color: #1f2937;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      max-width: 24rem;
-      width: 100%;
-    }
-    button:disabled {
-      background-color: #374151;
-      cursor: not-allowed;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Tri de Déchets - CFA</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="demo-label">DÉMO</div>
-  <div class="profit-counter">
-    Profit : <span id="floating-profit">0.00</span> €
-  </div>
-  <div class="trade-counter">
-    Trades : <span id="trade-count">0</span> | Prochain : <span id="next-trade-countdown">30s</span>
-  </div>
-
-  <div class="container mx-auto px-4 py-8">
-    <header class="text-center mb-10">
-      <h1 class="text-4xl font-bold mb-2">MemeTrader Pro V3</h1>
-      <p class="text-gray-400">Bot de trading ultra-agressif - 1 trade toutes les 30 secondes</p>
-    </header>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-      <div class="card p-6">
-        <h2 class="text-xl font-semibold mb-4">Portefeuilles</h2>
-        <div class="flex justify-between items-center mb-4"> <span>Solde principal (80%) :</span> <span id="main-balance" class="text-2xl font-bold text-green-400">0.00 €</span></div>
-        <div class="flex justify-between items-center mb-4"> <span>Portefeuille de rachat (20%) :</span> <span id="buyback-balance" class="text-xl font-bold text-blue-400">0.00 €</span></div>
-        <div class="flex justify-between items-center mb-4"> <span>Profit total :</span> <span id="total-profit" class="text-xl font-bold text-green-400">0.00 €</span></div>
-        <div class="flex justify-between items-center mb-4"> <span>Profit journalier :</span> <span id="daily-profit" class="text-lg font-bold text-green-400">0.00 €</span></div>
-        <button id="withdraw-btn" class="w-full py-3 mt-6 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg">Retirer les fonds</button>
-      </div>
-
-      <div class="card p-6">
-        <h2 class="text-xl font-semibold mb-4">État du Bot</h2>
-        <div class="flex items-center mb-4"><div id="status-indicator" class="w-3 h-3 rounded-full bg-gray-500 mr-2"></div><span id="bot-status">Inactif</span></div>
-        <div class="mb-4">
-          <div class="flex justify-between mb-1"><span class="text-sm">Analyse du marché</span><span id="scan-percent" class="text-sm">0%</span></div>
-          <div class="bg-gray-700 rounded-full h-2 mb-4"><div id="scan-progress" class="progress-bar w-0"></div></div>
-        </div>
-        <div class="mb-4"><p class="text-sm mb-2">Stratégie actuelle :</p><p id="current-strategy" class="font-medium">Aucune</p></div>
-        <div class="mb-4"><p class="text-sm mb-2">Dernière action :</p><p id="last-action" class="font-medium">Aucune</p></div>
-        <button id="start-bot" class="w-full py-3 mt-6 gradient-bg hover:opacity-90 text-white font-medium rounded-lg" disabled>Activer le Bot</button>
-      </div>
-
-      <div class="card p-6">
-        <h2 class="text-xl font-semibold mb-4">Dépôt</h2>
-        <div class="mb-4"><label for="deposit-amount" class="block mb-2 text-sm">Montant (€)</label><input type="number" id="deposit-amount" value="100" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white"/></div>
-        <div class="mb-4"><label for="payment-method" class="block mb-2 text-sm">Méthode de paiement</label><select id="payment-method" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white"><option value="btc">Bitcoin</option><option value="eth">Ethereum</option><option value="usdt">USDT</option></select></div>
-        <button id="deposit-btn" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg">Déposer des fonds</button>
-      </div>
+    <div id="login-container">
+        <h2>Connexion</h2>
+        <input type="text" id="username" placeholder="Entrez votre pseudo" required>
+        <select id="profession">
+            <option value="">Sélectionnez votre métier</option>
+            <option value="Boulanger">Boulanger</option>
+            <option value="Pâtissier">Pâtissier</option>
+            <option value="Cuisinier">Cuisinier</option>
+            <option value="Serveur">Serveur</option>
+            <option value="Mécanicien">Mécanicien</option>
+            <option value="Coiffeur">Coiffeur</option>
+            <!-- Ajoutez d'autres métiers au besoin -->
+        </select>
+        <button id="login-btn">Jouer</button>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-      <div class="lg:col-span-2">
-        <div class="card p-6 mb-6">
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold">Activité du Bot</h2>
-            <div id="live-indicator" class="flex items-center hidden"><div class="w-2 h-2 rounded-full bg-red-500 mr-2 blink"></div><span class="text-sm text-red-500">LIVE</span></div>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="min-w-full">
-              <thead>
-                <tr class="border-b border-gray-700"><th class="px-4 py-3 text-left">Heure</th><th class="px-4 py-3 text-left">Action</th><th class="px-4 py-3 text-left">Memecoin</th><th class="px-4 py-3 text-left">Prix</th><th class="px-4 py-3 text-left">Montant</th><th class="px-4 py-3 text-left">Profit/Perte</th></tr>
-              </thead>
-              <tbody id="activity-log"><tr class="border-b border-gray-800"><td class="px-4 py-3 text-gray-400" colspan="6">Aucune activité pour le moment</td></tr></tbody>
-            </table>
-          </div>
+    <div id="game-container" style="display:none;">
+        <div id="game-header">
+            <div>Joueur: <span id="player-name"></span></div>
+            <div>Score: <span id="score">0</span></div>
+            <div>Temps: <span id="timer">60</span>s</div>
         </div>
-
-        <div class="card p-6">
-          <h2 class="text-xl font-semibold mb-4">Répartition des profits</h2>
-          <div class="relative pt-1">
-            <div class="flex mb-2 items-center justify-between"><span class="text-xs font-semibold py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">Portefeuille principal</span><span class="text-xs font-semibold text-blue-600">80%</span></div>
-            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-700"><div style="width: 80%;" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500"></div></div>
-            <div class="flex mb-2 items-center justify-between"><span class="text-xs font-semibold py-1 px-2 uppercase rounded-full text-purple-600 bg-purple-200">Portefeuille de rachat</span><span class="text-xs font-semibold text-purple-600">20%</span></div>
-            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-700"><div style="width: 20%;" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500"></div></div>
-          </div>
-          <div class="mt-4"><h3 class="font-semibold mb-2">Détails de la répartition</h3><p class="text-sm text-gray-400 mb-2">• 80% des profits sont conservés dans le portefeuille principal pour maximiser les gains composés</p><p class="text-sm text-gray-400">• 20% sont automatiquement transférés vers le portefeuille de rachat pour sécuriser une partie des gains</p></div>
+        <div id="waste-area">
+            <div id="waste-item" draggable="true"></div>
         </div>
-      </div>
-
-      <div class="lg:col-span-1">
-        <div class="card p-6 mb-6"><h2 class="text-xl font-semibold mb-4">Statistiques</h2><div class="grid grid-cols-2 gap-4"><div class="bg-gray-800 rounded-lg p-4"><h3 class="text-gray-400 mb-2">Taux de réussite</h3><p id="success-rate" class="text-2xl font-bold">0%</p></div><div class="bg-gray-800 rounded-lg p-4"><h3 class="text-gray-400 mb-2">ROI moyen</h3><p id="avg-roi" class="text-2xl font-bold">0%</p></div><div class="bg-gray-800 rounded-lg p-4"><h3 class="text-gray-400 mb-2">Meilleur trade</h3><p id="best-trade" class="text-2xl font-bold text-green-400">0.00 €</p></div><div class="bg-gray-800 rounded-lg p-4"><h3 class="text-gray-400 mb-2">Transactions</h3><p id="total-trades" class="text-2xl font-bold">0</p></div></div></div>
-
-        <div class="card p-6"><h2 class="text-xl font-semibold mb-4">Paramètres du Bot</h2><div class="mb-4"><label for="trading-strategy" class="block mb-2 text-sm">Stratégie de trading</label><select id="trading-strategy" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white"><option value="momentum">Momentum (recommandé)</option><option value="breakout">Breakout</option><option value="reversal">Reversal</option><option value="aggressive" selected>Ultra-agressif</option></select></div><div class="mb-4"><label for="risk-management" class="block mb-2 text-sm">Gestion du risque</label><select id="risk-management" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white"><option value="conservative">Conservateur (seuil vente >5%)</option><option value="balanced">Équilibré (seuil vente >3%)</option><option value="aggressive" selected>Agressif (seuil vente >2%)</option></select></div><div class="mb-4"><label for="trade-amount" class="block mb-2 text-sm">Montant par trade (€)</label><input type="number" id="trade-amount" value="20" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white"/></div><button id="apply-settings" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg">Appliquer les paramètres</button></div>
-      </div>
+        <div id="bins-container">
+            <div class="bin" data-bin-type="verre">Verre</div>
+            <div class="bin" data-bin-type="papier">Papier</div>
+            <div class="bin" data-bin-type="plastique">Plastique</div>
+            <div class="bin" data-bin-type="organique">Organique</div>
+            <div class="bin" data-bin-type="metal">Métal</div>
+        </div>
     </div>
 
-    <h2 class="text-2xl font-bold mb-6">Top Memecoins Analysés</h2>
-    <div id="opportunities" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"></div>
-  </div>
-
-  <div id="deposit-modal" class="modal-backdrop" aria-hidden="true"><div class="modal"><h2 class="text-xl font-bold mb-4">Dépôt confirmé</h2><p class="mb-6">Votre dépôt de <span id="confirm-amount">0</span> € a été ajouté à votre compte.</p><button class="close-modal w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg">Fermer</button></div></div>
-  <div id="withdraw-modal" class="modal-backdrop" aria-hidden="true"><div class="modal"><h2 class="text-xl font-bold mb-4">Retrait confirmé</h2><p class="mb-6">Votre retrait de <span id="withdraw-amount">0</span> € a été traité avec succès.</p><button class="close-modal w-full py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg">Fermer</button></div></div>
-  <div id="bot-modal" class="modal-backdrop" aria-hidden="true"><div class="modal"><h2 class="text-xl font-bold mb-4">Bot activé</h2><p class="mb-6">Le bot de trading est actif. Il achètera si <br/>– portefeuille vide<br/>– ou aucune position à vendre selon le seuil de risque<br/>Sinon, il vendra si profit > seuil défini par gestion du risque.<br/>80% des gains vont au portefeuille principal, 20% au rachat.</p><button class="close-modal w-full py-3 gradient-bg hover:opacity-90 text-white font-medium rounded-lg">Fermer</button></div></div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      let mainBalance = 0, buybackBalance = 0, totalProfit = 0, dailyProfit = 0;
-      let trades = 0, successfulTrades = 0, bestTrade = 0, botActive = false, nextTradeCountdown = 30;
-      let portfolioCoins = [], scanInterval, tradeInterval, countdownInterval, marketUpdateInterval;
-
-      const mainBalanceEl = document.getElementById('main-balance');
-      const buybackBalanceEl = document.getElementById('buyback-balance');
-      const totalProfitEl = document.getElementById('total-profit');
-      const dailyProfitEl = document.getElementById('daily-profit');
-      const successRateEl = document.getElementById('success-rate');
-      const avgRoiEl = document.getElementById('avg-roi');
-      const bestTradeEl = document.getElementById('best-trade');
-      const totalTradesEl = document.getElementById('total-trades');
-      const floatingProfitEl = document.getElementById('floating-profit');
-      const tradeCountEl = document.getElementById('trade-count');
-      const scanPercentEl = document.getElementById('scan-percent');
-      const scanProgressEl = document.getElementById('scan-progress');
-      const currentStrategyEl = document.getElementById('current-strategy');
-      const lastActionEl = document.getElementById('last-action');
-      const statusIndicatorEl = document.getElementById('status-indicator');
-      const botStatusEl = document.getElementById('bot-status');
-      const nextTradeCountdownEl = document.getElementById('next-trade-countdown');
-      const liveIndicatorEl = document.getElementById('live-indicator');
-      const activityLogEl = document.getElementById('activity-log');
-      const opportunitiesContainer = document.getElementById('opportunities');
-
-      const depositAmountInput = document.getElementById('deposit-amount');
-      const depositBtn = document.getElementById('deposit-btn');
-      const withdrawBtn = document.getElementById('withdraw-btn');
-      const startBotBtn = document.getElementById('start-bot');
-      const applySettingsBtn = document.getElementById('apply-settings');
-      const tradeAmountInput = document.getElementById('trade-amount');
-      const riskSelect = document.getElementById('risk-management');
-
-      const depositModal = document.getElementById('deposit-modal');
-      const withdrawModal = document.getElementById('withdraw-modal');
-      const botModal = document.getElementById('bot-modal');
-      const confirmAmountEl = document.getElementById('confirm-amount');
-      const withdrawAmountEl = document.getElementById('withdraw-amount');
-
-      const strategies = [
-        "Achat sur momentum haussier",
-        "Vente sur résistance majeure",
-        "Achat sur support confirmé",
-        "Scalping sur volatilité",
-        "Swing trading sur tendance",
-        "Achat sur correction de prix",
-        "Vente sur divergence RSI",
-        "Trading haute fréquence",
-        "Arbitrage inter-exchanges",
-        "Achat sur annonce communauté"
-      ];
-
-      const memecoins = [
-        { name: "DogeMoon", symbol: "DGMN", cap: 2500000, price: 0.00004213, volume: 450000, trend: 1, volatility: 0.15, potential: 7, lastChange: 0 },
-        { name: "CatRocket", symbol: "CTRKT", cap: 1800000, price: 0.00000891, volume: 320000, trend: -1, volatility: 0.22, potential: 4, lastChange: 0 },
-        { name: "FrogLambo", symbol: "FRGLA", cap: 4200000, price: 0.00002145, volume: 780000, trend: 1, volatility: 0.18, potential: 6, lastChange: 0 },
-        { name: "PepeCoin", symbol: "PEPE", cap: 8500000, price: 0.00000123, volume: 1200000, trend: 2, volatility: 0.25, potential: 9, lastChange: 0 },
-        { name: "MoonShot", symbol: "MOON", cap: 950000, price: 0.00000045, volume: 180000, trend: -2, volatility: 0.30, potential: 3, lastChange: 0 },
-        { name: "RocketDoge", symbol: "RKDG", cap: 3100000, price: 0.00001567, volume: 650000, trend: 0, volatility: 0.20, potential: 5, lastChange: 0 },
-        { name: "SharkFin", symbol: "SHRK", cap: 1200000, price: 0.00000789, volume: 290000, trend: 1, volatility: 0.17, potential: 6, lastChange: 0 },
-        { name: "ElonPump", symbol: "ELPMP", cap: 5600000, price: 0.00003421, volume: 920000, trend: 3, volatility: 0.28, potential: 8, lastChange: 0 },
-        { name
-      ];
-    });
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>

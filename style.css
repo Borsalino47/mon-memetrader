@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    color: #333;
+}
+
+#login-container, #game-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2.5em;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 700px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 0.8em;
+    margin: 0.5em 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#game-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+    font-size: 1.2em;
+}
+
+#waste-area {
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+#waste-item {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc; /* Couleur par défaut */
+    cursor: grab;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#bins-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+.bin {
+    width: 100px;
+    height: 120px;
+    border: 2px dashed #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+.bin.verre { background-color: #c8e6c9; }
+.bin.papier { background-color: #bbdefb; }
+.bin.plastique { background-color: #fff9c4; }
+.bin.organique { background-color: #d7ccc8; }
+.bin.metal { background-color: #cfd8dc; }
+
+.bin.drag-over {
+    border-style: solid;
+    transform: scale(1.05);
+}
+
+/* Animations pour le feedback */
+.bin.correct-drop {
+    animation: correct 0.5s ease;
+}
+
+.bin.incorrect-drop {
+    animation: incorrect 0.5s ease;
+}
+
+@keyframes correct {
+    0% { transform: scale(1.05); background-color: #4caf50; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1.05); background-color: #4caf50; }
+}
+
+@keyframes incorrect {
+    0% { transform: scale(1.05); background-color: #f44336; }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: scale(1.05); background-color: #f44336; }
+}
+
+#waste-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.bin:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
